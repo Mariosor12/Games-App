@@ -49,7 +49,8 @@ public class HomeView extends VerticalLayout {
             // Crear un layout flexible para acomodar las tarjetas  
             FlexLayout flexLayout = new FlexLayout();  
             flexLayout.setFlexDirection(FlexLayout.FlexDirection.ROW);  
-            flexLayout.setFlexWrap(FlexLayout.FlexWrap.WRAP);  
+            flexLayout.setFlexWrap(FlexLayout.FlexWrap.WRAP); 
+            flexLayout.setJustifyContentMode(FlexLayout.JustifyContentMode.CENTER); // Centrar horizontalmente   
             
             // Crear tarjetas para cada juego  
             for (Game game : games) {  
@@ -79,7 +80,7 @@ public class HomeView extends VerticalLayout {
                 .set("padding", "10px")  
                 .set("margin", "10px")  
                 .set("background-color", "#f9f9f9")  
-                .set("width", "220px"); // Definir un ancho fijo para las tarjetas  
+                .set("width", "240px");  
 
         // Crear un RouterLink al juego  
         RouterLink link = new RouterLink(game.getNombre(), GameDetailView.class,   

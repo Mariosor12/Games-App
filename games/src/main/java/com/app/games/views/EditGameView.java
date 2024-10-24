@@ -70,24 +70,16 @@ public class EditGameView extends VerticalLayout implements BeforeEnterObserver 
         Button saveButton = new Button("Guardar cambios"); 
         saveButton.getStyle().set("margin-left", "20px"); 
 
-        HorizontalLayout layout1 = new HorizontalLayout(createRow("Name", nombreField), createRow("Genre", tipoField));  
+        VerticalLayout layout1 = new VerticalLayout(createRow("Nombre", nombreField), createRow("Tipo", tipoField), createRow("Empresa Desarrolladora", empresaDesarrolladoraField), createRow("Plataformas (separadas por comas)", plataformasField),
+        createRow("Cantidad de Jugadores Locales", cantidadJugadoresLocalField), createRow("Fecha de Salida", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox));  
         layout1.getStyle().set("margin-left", "20px");  
 
-        HorizontalLayout layout2 = new HorizontalLayout(createRow("Developer", empresaDesarrolladoraField), createRow("Platforms (separated by comma)", plataformasField));  
-        layout2.getStyle().set("margin-left", "20px");  
-
-        HorizontalLayout layout3 = new HorizontalLayout(createRow("Quantity Local CO-OP", cantidadJugadoresLocalField), createRow("Release Date", fechaSalidaField));  
-        layout3.getStyle().set("margin-left", "20px");  
-
-        HorizontalLayout layout4 = new HorizontalLayout(createRow(coOpLocalCheckbox, coOpOnlineCheckbox));  
-        layout4.getStyle().set("margin-left", "20px");  
-
-        // Crear un layout para los botones  
-        HorizontalLayout buttonLayout = new HorizontalLayout(saveButton, backButton);  
+        // Crear un layout para los botones utilizando VerticalLayout  
+        VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
         buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px");  
 
         // Añadir todos los layouts al componente principal  
-        add(layout1, layout2, layout3, layout4, buttonLayout); 
+        add(layout1, buttonLayout); 
 
         // Añadir listener para el botón de guardar  
         saveButton.addClickListener(e -> saveGame());  

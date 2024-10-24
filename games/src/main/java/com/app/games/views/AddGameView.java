@@ -53,41 +53,30 @@ public class AddGameView extends VerticalLayout {
         // Agregar el header a la vista  
         add(header);
         
-        H3 title = new H3("Add Game"); 
+        H3 title = new H3("Add Game");   
         title.getStyle().set("margin-left", "20px");   
-        add(title); 
+        add(title);   
 
-        HorizontalLayout layout1 = new HorizontalLayout(createRow("Name", nombreField),  
-            createRow("Genre", tipoField));  
-        layout1.getStyle().set("margin-left", "20px");  
-
-        HorizontalLayout layout2 = new HorizontalLayout(createRow("Developer", empresaDesarrolladoraField),  
-            createRow("Platforms (separated by comma)", plataformasField));  
-        layout2.getStyle().set("margin-left", "20px");  
-
-        HorizontalLayout layout3 = new HorizontalLayout(createRow("Quantity Local CO-OP", cantidadJugadoresLocalField),  
-            createRow("Release Date", fechaSalidaField));  
-        layout3.getStyle().set("margin-left", "20px");  
-
-        HorizontalLayout layout4 = new HorizontalLayout(createRow(coOpLocalCheckbox, coOpOnlineCheckbox));  
-        layout4.getStyle().set("margin-left", "20px");  
-
-        HorizontalLayout layout5 = new HorizontalLayout(createRow("Review", puntuacionField),  
+        // Cambiar HorizontalLayout por VerticalLayout para hacer que los elementos estén uno debajo del otro  
+        VerticalLayout layout1 = new VerticalLayout(createRow("Name", nombreField),  
+            createRow("Genre", tipoField), createRow("Developer", empresaDesarrolladoraField),  
+            createRow("Platforms (separated by comma)", plataformasField), createRow("Quantity Local CO-OP", cantidadJugadoresLocalField),  
+            createRow("Release Date", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox), createRow("Review", puntuacionField),  
             createRow("Commentary", comentarioField));  
-        layout5.getStyle().set("margin-left", "20px");  
+        layout1.getStyle().set("margin-left", "20px");   
 
-        // Crear un layout para los botones  
-        HorizontalLayout buttonLayout = new HorizontalLayout(saveButton, backButton);  
+        // Crear un layout para los botones y añadir margenes para separación  
+        VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
         buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px");  
 
         // Añadir todos los layouts al componente principal  
-        add(layout1, layout2, layout3, layout4, layout5, buttonLayout); 
+        add(layout1, buttonLayout);   
 
         // Añadir listener para el botón de guardar  
         saveButton.addClickListener(e -> saveGame());  
 
         // Añadir listener para el botón de regresar  
-        backButton.addClickListener(e -> navigateBack()); 
+        backButton.addClickListener(e -> navigateBack());  
     }  
 
     private HorizontalLayout createRow(String labelText, TextField textField) {  

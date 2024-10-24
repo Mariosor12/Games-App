@@ -40,7 +40,6 @@ public class HomeView extends VerticalLayout {
             
             // Título de la vista  
             H2 title = new H2("Games List");   
-            title.getStyle().set("margin-left", "20px");
             add(title); 
 
             // Obtener todos los juegos  

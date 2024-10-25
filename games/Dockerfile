@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copiar el JAR de la aplicación y el archivo JSON al contenedor   
 COPY db.json .  
+COPY build/libs/games-0.0.1-SNAPSHOT.jar . 
 
 # Instalar JSON Server  
 RUN apt-get update && apt-get install -y nodejs npm \

@@ -26,4 +26,4 @@ FROM openjdk:17-slim
 EXPOSE 8080  
 
 # Comando para ejecutar la aplicación  
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "games-0.0.1-SNAPSHOT.jar"]

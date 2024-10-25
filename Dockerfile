@@ -14,8 +14,8 @@ COPY games/src ./src
 # Compila la aplicación  
 RUN gradle build --no-daemon  
 
-# Usa una imagen base de Java para ejecutar la aplicación  
-FROM openjdk:17-jre-slim  
+# Usa una imagen base de OpenJDK para ejecutar la aplicación  
+FROM openjdk:17-slim  
 
 # Establece el directorio de trabajo  
 WORKDIR /app  

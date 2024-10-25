@@ -8,7 +8,7 @@ WORKDIR /app/games
 COPY games/settings.gradle .  
 COPY games/build.gradle .  
 COPY games/gradlew .  
-COPY games/gradle ./gradle  # Copia todo el directorio gradle  
+COPY games/gradle ./gradle 
 
 # Copia el código fuente de la aplicación  
 COPY games/src ./src  

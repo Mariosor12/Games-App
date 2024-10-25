@@ -1,6 +1,7 @@
 package com.app.games.views;  
 
 import com.vaadin.flow.component.html.Anchor; // Importa Anchor  
+import com.vaadin.flow.component.html.Paragraph; // Importa Paragraph  
 import com.vaadin.flow.component.login.LoginForm;  
 import com.vaadin.flow.component.notification.Notification;  
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;  
@@ -65,7 +66,11 @@ public class LoginView extends VerticalLayout {
 
         linkLayout.add(registerLink); // Agregar el enlace al layout  
 
-        // Agregar la sección del enlace al formulario  
+        // Agregar el párrafo con los datos de la demostración  
+        Paragraph demoData = new Paragraph("Put this data for the demo: anagarcia y abcdef");  
+        add(demoData); // Agregar el párrafo a la vista  
+
+        // Agregar el layout del enlace al formulario  
         add(linkLayout);  
     }  
 }

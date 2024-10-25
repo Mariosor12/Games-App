@@ -4,7 +4,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.UI;  
 import com.vaadin.flow.component.html.Div;  
 import com.vaadin.flow.component.html.H2;  
-import com.vaadin.flow.component.html.Paragraph;  
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;  
 import com.vaadin.flow.router.Route;  
 import com.vaadin.flow.router.RouteParameters;  
@@ -36,11 +37,16 @@ public class HomeView extends VerticalLayout {
         
         if (userId != null) {  
             header.setTitleClickable(true);  
-            header.setProfileLinkVisible(true);   
+            header.setProfileLinkVisible(true);
+            
+            VerticalLayout layout = new VerticalLayout();  
+            layout.setAlignItems(FlexComponent.Alignment.CENTER);
             
             // Título de la vista  
             H2 title = new H2("Games List");   
-            add(title); 
+            layout.add(title);  
+
+            add(layout); 
 
             // Obtener todos los juegos  
             List<Game> games = gameService.getAllGames();  

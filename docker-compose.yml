@@ -4,15 +4,15 @@ services:
   json-server:  
     image: typicode/json-server  
     volumes:  
-      - ./db.json:/data/db.json  
+      - ./games/db.json:/data/db.json      # Ruta ajustada para db.json  
     ports:  
-      - "3000:80"  
-
+      - "3000:80"                           # El puerto en que escuchará el JSON Server  
+  
   app:  
     build:  
       context: .  
-      dockerfile: Dockerfile # Tu Dockerfile para la aplicación  
+      dockerfile: Dockerfile                # Aquí apunta a tu Dockerfile de la aplicación  
     ports:  
-      - "8080:8080" # Puerto de tu aplicación  
+      - "8080:8080"                         # Puerto donde tu aplicación escucha  
     depends_on:  
-      - json-server
+      - json-server                         # Asegura que json-server esté disponible antes de que arranque la app

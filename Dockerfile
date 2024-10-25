@@ -1,4 +1,4 @@
-# Usa una imagen de Gradle para compilar tu aplicación con JDK 17  
+# Usa una imagen de Gradle para compilar tu aplicación  
 FROM gradle:7.6.0-jdk17 AS builder  
 
 # Establece el directorio de trabajo  
@@ -11,8 +11,15 @@ COPY games/build.gradle .
 # Copia el código fuente de la aplicación  
 COPY games/src ./src  
 
+# Copia el wrapper de Gradle ( gradlew ) y el directorio gradle  
+COPY gradlew .  
+COPY gradle ./gradle  
+
+# Asegúrate de que el wrapper de Gradle es ejecutable  
+RUN chmod +x ./gradlew  
+
 # Compila la aplicación  
-RUN ./gradlew build  
+RUN ./gradlew build --no-daemon  
 
 # Usa una imagen base de OpenJDK para ejecutar la aplicación  
 FROM openjdk:17-slim  

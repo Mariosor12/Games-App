@@ -22,6 +22,9 @@ RUN ./gradlew build --no-daemon
 # Usa una imagen base de OpenJDK para ejecutar la aplicación  
 FROM openjdk:17-slim    
 
+# Copia el JAR compilado desde la etapa de construcción  
+COPY build/libs games-0.0.1-SNAPSHOT.jar  
+
 # Expone el puerto donde se ejecutará tu aplicación  
 EXPOSE 8080  
 

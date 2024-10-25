@@ -2,7 +2,7 @@
 FROM gradle:7.6.0-jdk17 AS builder  
 
 # Establece el directorio de trabajo  
-WORKDIR /app/games  
+WORKDIR /games  
 
 # Copia el archivo de configuración de Gradle y el wrapper  
 COPY games/settings.gradle .  

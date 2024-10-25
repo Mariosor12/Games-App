@@ -5,8 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app  
 
 # Copiar el JAR de la aplicación y el archivo JSON al contenedor   
-COPY db.json .  
-COPY build/libs/games-0.0.1-SNAPSHOT.jar . 
+COPY db.json .   
 
 # Instalar JSON Server  
 RUN apt-get update && apt-get install -y nodejs npm \
@@ -16,4 +15,4 @@ RUN apt-get update && apt-get install -y nodejs npm \
 EXPOSE 8080 3000  
 
 # Comando para ejecutar JSON Server y luego la aplicación Spring Boot  
-CMD json-server --watch db.json --port 3000 & java -jar games-0.0.1-SNAPSHOT.jar
+CMD json-server --watch db.json --port 3000

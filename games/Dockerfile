@@ -8,7 +8,7 @@ WORKDIR /app/games
 COPY games/settings.gradle .  
 COPY games/build.gradle .  
 COPY games/gradlew .  
-COPY games/gradle ./gradle 
+COPY games/gradle ./gradle   
 
 # Copia el código fuente de la aplicación  
 COPY games/src ./src  
@@ -20,12 +20,12 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build --no-daemon  
 
 # Usa una imagen base de OpenJDK para ejecutar la aplicación  
-FROM openjdk:17-slim 
+FROM openjdk:17-slim   
 
-WORKDIR /games
+WORKDIR /games  
 
 # Copia el JAR compilado desde la etapa de construcción  
-COPY build/libs games-0.0.1-SNAPSHOT.jar  
+COPY --from=builder /app/games/build/libs/games-0.0.1-SNAPSHOT.jar /games/games-0.0.1-SNAPSHOT.jar  
 
 # Expone el puerto donde se ejecutará tu aplicación  
 EXPOSE 8080  

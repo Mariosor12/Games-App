@@ -1,17 +1,21 @@
-# Usa una imagen de Gradle para compilar tu aplicación  
-FROM gradle:7.6.0-jdk11 AS builder  
-
-# Copia los archivos del proyecto a la ruta de trabajo  
-COPY . /app  
+# Usa una imagen de Gradle para compilar tu aplicación con JDK 17  
+FROM gradle:7.6.0-jdk17 AS builder  
 
 # Establece el directorio de trabajo  
 WORKDIR /app/games  
+
+# Copia el archivo de configuración de Gradle  
+COPY games/settings.gradle .  
+COPY games/build.gradle .  
+
+# Copia el código fuente de la aplicación  
+COPY games/src ./src  
 
 # Compila la aplicación  
 RUN gradle build --no-daemon  
 
 # Usa una imagen base de Java para ejecutar la aplicación  
-FROM openjdk:11-jre-slim  
+FROM openjdk:17-jre-slim  
 
 # Establece el directorio de trabajo  
 WORKDIR /app  

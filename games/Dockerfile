@@ -1,18 +1,26 @@
-# Usar una imagen base de Java  
+# Usa una imagen de Gradle para compilar tu aplicación  
+FROM gradle:7.6.0-jdk11 AS builder  
+
+# Copia los archivos del proyecto a la ruta de trabajo  
+COPY . /app  
+
+# Establece el directorio de trabajo  
+WORKDIR /app/games  
+
+# Compila la aplicación  
+RUN gradle build --no-daemon  
+
+# Usa una imagen base de Java para ejecutar la aplicación  
 FROM openjdk:11-jre-slim  
 
-# Establecer el directorio de trabajo  
+# Establece el directorio de trabajo  
 WORKDIR /app  
 
-# Copiar el JAR de la aplicación y el archivo JSON al contenedor   
-COPY db.json .   
+# Copia el JAR compilado desde la etapa de construcción  
+COPY --from=builder /app/games/build/libs/games-0.0.1-SNAPSHOT.jar app.jar  
 
-# Instalar JSON Server  
-RUN apt-get update && apt-get install -y nodejs npm \
-    && npm install -g json-server  
+# Expone el puerto donde se ejecutará tu aplicación  
+EXPOSE 8080  
 
-# Exponer los puertos  
-EXPOSE 8080 3000  
-
-# Comando para ejecutar JSON Server y luego la aplicación Spring Boot  
-CMD json-server --watch db.json --port 3000
+# Comando para ejecutar la aplicación  
+CMD ["java", "-jar", "app.jar"]

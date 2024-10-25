@@ -26,7 +26,7 @@ FROM openjdk:17-slim
 WORKDIR /app  
 
 # Copia el JAR compilado desde la etapa de construcción  
-COPY --from=builder /app/games/build/libs/games-0.0.1-SNAPSHOT.jar app.jar  
+COPY games/build/libs/games-0.0.1-SNAPSHOT.jar app.jar  
 
 # Expone el puerto donde se ejecutará tu aplicación  
 EXPOSE 8080  

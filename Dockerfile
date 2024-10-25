@@ -4,16 +4,14 @@ FROM gradle:7.6.0-jdk17 AS builder
 # Establece el directorio de trabajo  
 WORKDIR /app/games  
 
-# Copia el archivo de configuración de Gradle  
+# Copia el archivo de configuración de Gradle y el wrapper  
 COPY games/settings.gradle .  
 COPY games/build.gradle .  
+COPY games/gradlew .  
+COPY games/gradle ./gradle  # Copia todo el directorio gradle  
 
 # Copia el código fuente de la aplicación  
 COPY games/src ./src  
-
-# Copia el wrapper de Gradle ( gradlew ) y el directorio gradle  
-COPY gradlew .  
-COPY gradle ./gradle  
 
 # Asegúrate de que el wrapper de Gradle es ejecutable  
 RUN chmod +x ./gradlew  

@@ -16,8 +16,8 @@ import java.util.Optional;
 @Service  
 public class ListService {  
 
-    private final String BASE_URL = "http://localhost:3000/list";
-    private final String USERS_BASE_URL = "http://localhost:3000/users";
+    private final String BASE_URL = "https://games-app-toe0.onrender.com/list";
+    private final String USERS_BASE_URL = "https://games-app-toe0.onrender.com/users";
     private final RestTemplate restTemplate;  
 
     @Autowired  

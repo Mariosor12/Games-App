@@ -22,12 +22,12 @@ ext {
 	set('vaadinVersion', "24.5.0")
 }
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.vaadin:vaadin-spring-boot-starter:24.0.0'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+dependencies {  
+    implementation 'org.springframework.boot:spring-boot-starter-web'  
+    implementation 'com.vaadin:vaadin-spring-boot-starter'  // Usar versión de BOM  
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'  
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'  
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'  
 }
 
 dependencyManagement {

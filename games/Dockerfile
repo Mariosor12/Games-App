@@ -4,8 +4,7 @@ FROM openjdk:11-jre-slim
 # Establecer el directorio de trabajo  
 WORKDIR /app  
 
-# Copiar el JAR de la aplicación y el archivo JSON al contenedor  
-COPY build/libs/games-0.0.1-SNAPSHOT.jar .  
+# Copiar el JAR de la aplicación y el archivo JSON al contenedor   
 COPY db.json .  
 
 # Instalar JSON Server  

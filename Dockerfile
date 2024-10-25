@@ -12,7 +12,7 @@ COPY games/build.gradle .
 COPY games/src ./src  
 
 # Compila la aplicación  
-RUN ./gradle build  
+RUN ./gradlew build  
 
 # Usa una imagen base de OpenJDK para ejecutar la aplicación  
 FROM openjdk:17-slim  

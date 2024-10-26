@@ -54,7 +54,7 @@ public class AddGameView extends VerticalLayout {
         add(header);
         
         H3 title = new H3("Add Game");   
-        title.getStyle().set("margin-left", "20px");   
+        title.getStyle().set("margin-left", "20px").set("width", "auto");   
         add(title);   
 
         // Cambiar HorizontalLayout por VerticalLayout para hacer que los elementos estén uno debajo del otro  
@@ -63,11 +63,11 @@ public class AddGameView extends VerticalLayout {
             createRow("Platforms (separated by comma)", plataformasField), createRow("Quantity Local CO-OP", cantidadJugadoresLocalField),  
             createRow("Release Date", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox), createRow("Review", puntuacionField),  
             createRow("Commentary", comentarioField));  
-        layout1.getStyle().set("margin-left", "20px");   
+        layout1.getStyle().set("margin-left", "20px").set("width", "auto");   
 
         // Crear un layout para los botones y añadir margenes para separación  
         VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
-        buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px");  
+        buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px").set("width", "auto");  
 
         // Añadir todos los layouts al componente principal  
         add(layout1, buttonLayout);   

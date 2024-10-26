@@ -24,15 +24,25 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
     private TextField correoField;  
     private TextField nombreUsuarioField;  
     private TextField contrasenaField;  
-    private String userId;  
+    private String userId;
+
+    private HeaderComponent header;  
 
     @Autowired  
     public EditProfileView(UserService userService) {  
         this.userService = userService;  
 
-        setPadding(false); // Eliminar el padding  
+       setPadding(false); // Eliminar el padding  
         setMargin(false); // Eliminar el margin  
-        setWidthFull();  
+
+        header = new HeaderComponent();  
+        
+        // Solicitando que el título no sea clickeable y ocultando el perfil  
+        header.setTitleClickable(true);  
+        header.setProfileLinkVisible(true);  
+
+        // Agregar el header a la vista  
+        add(header); 
 
         H3 title = new H3("Editar Perfil");  
         title.getStyle().set("margin-left", "20px");  
@@ -57,11 +67,11 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
                 createRow("Nombre de Usuario", nombreUsuarioField),  
                 createRow("Contraseña", contrasenaField)  
         );  
-        layout.getStyle().set("margin-left", "20px");  
+        layout.getStyle().set("margin-left", "20px").set("width", "auto");  
 
         // Crear un layout para los botones  
         VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
-        buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px");  
+        buttonLayout.getStyle().set("margin-bottom", "20px");  
 
         // Añadir todos los layouts al componente principal  
         add(layout, buttonLayout);  

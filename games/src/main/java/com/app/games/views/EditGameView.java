@@ -72,11 +72,11 @@ public class EditGameView extends VerticalLayout implements BeforeEnterObserver 
 
         VerticalLayout layout1 = new VerticalLayout(createRow("Nombre", nombreField), createRow("Tipo", tipoField), createRow("Empresa Desarrolladora", empresaDesarrolladoraField), createRow("Plataformas (separadas por comas)", plataformasField),
         createRow("Cantidad de Jugadores Locales", cantidadJugadoresLocalField), createRow("Fecha de Salida", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox));  
-        layout1.getStyle().set("margin-left", "20px");  
+        layout1.getStyle().set("margin-left", "20px").set("width", "auto");  
 
         // Crear un layout para los botones utilizando VerticalLayout  
         VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
-        buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px");  
+        buttonLayout.getStyle().set("margin-bottom", "20px");  
 
         // Añadir todos los layouts al componente principal  
         add(layout1, buttonLayout); 

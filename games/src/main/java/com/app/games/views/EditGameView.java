@@ -55,23 +55,23 @@ public class EditGameView extends VerticalLayout implements BeforeEnterObserver 
         title.getStyle().set("margin-left", "20px");   
         add(title);  
 
-        nombreField = new TextField("Nombre");  
-        tipoField = new TextField("Tipo");  
-        empresaDesarrolladoraField = new TextField("Empresa Desarrolladora");  
-        plataformasField = new TextField("Plataformas (separadas por comas)");  
-        cantidadJugadoresLocalField = new TextField("Cantidad de Jugadores Locales");  
-        fechaSalidaField = new TextField("Fecha de Salida");
-        coOpLocalCheckbox = new Checkbox("Co-Op Local");  
-        coOpOnlineCheckbox = new Checkbox("Co-Op Online");
+        nombreField = new TextField("Name");  
+        tipoField = new TextField("Genre");  
+        empresaDesarrolladoraField = new TextField("Developer");  
+        plataformasField = new TextField("Platforms (separated by comma)");  
+        cantidadJugadoresLocalField = new TextField("Quantity Local CO-OP");  
+        fechaSalidaField = new TextField("Release Date");
+        coOpLocalCheckbox = new Checkbox("Local Co-Op");  
+        coOpOnlineCheckbox = new Checkbox("Online Co-Op");
 
-        Button backButton = new Button("Regresar"); 
+        Button backButton = new Button("Go Back"); 
         backButton.getStyle().set("margin-left", "20px");  
 
-        Button saveButton = new Button("Guardar cambios"); 
+        Button saveButton = new Button("Confirm Changes"); 
         saveButton.getStyle().set("margin-left", "20px"); 
 
-        VerticalLayout layout1 = new VerticalLayout(createRow("Nombre", nombreField), createRow("Tipo", tipoField), createRow("Empresa Desarrolladora", empresaDesarrolladoraField), createRow("Plataformas (separadas por comas)", plataformasField),
-        createRow("Cantidad de Jugadores Locales", cantidadJugadoresLocalField), createRow("Fecha de Salida", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox));  
+        VerticalLayout layout1 = new VerticalLayout(createRow("Name", nombreField), createRow("Genre", tipoField), createRow("Developer", empresaDesarrolladoraField), createRow("Platforms (separated by comma)", plataformasField),
+        createRow("Quantity Local CO-OP", cantidadJugadoresLocalField), createRow("Release Date", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox));  
         layout1.getStyle().set("margin-left", "20px").set("width", "auto");  
 
         // Crear un layout para los botones utilizando VerticalLayout  

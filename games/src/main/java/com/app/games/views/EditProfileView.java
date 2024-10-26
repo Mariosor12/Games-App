@@ -44,28 +44,28 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
         // Agregar el header a la vista  
         add(header); 
 
-        H3 title = new H3("Editar Perfil");  
+        H3 title = new H3("Edit Profile");  
         title.getStyle().set("margin-left", "20px");  
         add(title);  
 
-        nombreField = new TextField("Nombre");  
-        apellidoField = new TextField("Apellido");  
-        correoField = new TextField("Correo");  
-        nombreUsuarioField = new TextField("Nombre de Usuario");  
-        contrasenaField = new TextField("Contraseña");  
+        nombreField = new TextField("Name");  
+        apellidoField = new TextField("LastName");  
+        correoField = new TextField("Email");  
+        nombreUsuarioField = new TextField("Username");  
+        contrasenaField = new TextField("Password");  
 
-        Button backButton = new Button("Regresar");  
+        Button backButton = new Button("Go Back");  
         backButton.getStyle().set("margin-left", "20px");  
 
-        Button saveButton = new Button("Guardar Cambios");  
+        Button saveButton = new Button("Confirm Changes");  
         saveButton.getStyle().set("margin-left", "20px");  
 
         VerticalLayout layout = new VerticalLayout(  
-                createRow("Nombre", nombreField),  
-                createRow("Apellido", apellidoField),  
-                createRow("Correo", correoField),  
-                createRow("Nombre de Usuario", nombreUsuarioField),  
-                createRow("Contraseña", contrasenaField)  
+                createRow("Name", nombreField),  
+                createRow("LastName", apellidoField),  
+                createRow("Email", correoField),  
+                createRow("Username", nombreUsuarioField),  
+                createRow("Paasword", contrasenaField)  
         );  
         layout.getStyle().set("margin-left", "20px").set("width", "auto");  
 

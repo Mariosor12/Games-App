@@ -72,6 +72,19 @@ public class UserService {
     public List<User> getUsuarios() {  
         return usuarios;  
     } 
+
+    public User updateUser(String userId, User updatedUser) {  
+        try {  
+            // Realiza la solicitud PUT para actualizar el usuario  
+            restTemplate.put(jsonServerUrl + "/" + userId, updatedUser);  
+            // Opcional: Actualiza la lista local de usuarios  
+            loadUsersFromJsonServer();  
+            return updatedUser; // O puedes retornar el usuario actualizado desde el servidor  
+        } catch (Exception e) {  
+            // Manejo de excepciones  
+            throw new RuntimeException("Error al actualizar el usuario con id: " + userId, e);  
+        }  
+    } 
     
     public void deleteUser(String id) {  
     try {  

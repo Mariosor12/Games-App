@@ -56,7 +56,7 @@ public class MyProfileView extends VerticalLayout implements BeforeEnterObserver
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
         this.userId = (String) VaadinSession.getCurrent().getAttribute("userId");
-                if (userId != null) {  
+            if (userId != null) {  
             // Aquí buscamos el juego usando el ID  
             User user = userService.findUserById(userId);   
             List<Game> game = gameService.findGameByUserId(userId);  
@@ -86,14 +86,20 @@ public class MyProfileView extends VerticalLayout implements BeforeEnterObserver
                 Button addGameButton = new Button("Add Game", e -> {    
                     getUI().ifPresent(ui -> ui.navigate("add-game"));   
                     dialog.close();  
-                });  
+                }); 
+                
+                Button editProfileButton = new Button("Edit Profile", e -> {  
+                    getUI().ifPresent(ui -> ui.navigate("edit-profile")); // Asegúrate de que exista la ruta para editar el perfil  
+                    dialog.close();  
+                });
 
                 // Establecer margen para los botones del diálogo  
                 addGameButton.getStyle().set("margin-left", "20px");  
                 logoutButton.getStyle().set("margin-left", "20px");  
-                deleteAccountButton.getStyle().set("margin-left", "20px");  
+                deleteAccountButton.getStyle().set("margin-left", "20px"); 
+                editProfileButton.getStyle().set("margin-left", "20px"); 
 
-                VerticalLayout dialogLayout = new VerticalLayout(addGameButton, logoutButton, deleteAccountButton);  
+                VerticalLayout dialogLayout = new VerticalLayout(addGameButton, editProfileButton, logoutButton, deleteAccountButton);  
                 dialog.add(dialogLayout);   
 
                 // Crear un contenedor para el nombre y el icono  

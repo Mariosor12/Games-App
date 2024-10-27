@@ -62,22 +62,24 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
         saveButton.getStyle().set("margin-left", "20px");  
 
         // Agrupar los campos en filas  
-        HorizontalLayout row1 = new HorizontalLayout(nombreField, apellidoField); // Fila 1  
-        HorizontalLayout row2 = new HorizontalLayout(correoField, nombreUsuarioField); // Fila 2  
-        HorizontalLayout row3 = new HorizontalLayout(contrasenaField); // Fila 3 (única)  
+        HorizontalLayout row1 = new HorizontalLayout(nombreField, apellidoField); 
+        HorizontalLayout row2 = new HorizontalLayout(correoField, nombreUsuarioField);
+        HorizontalLayout row3 = new HorizontalLayout(contrasenaField);
+        HorizontalLayout button = new HorizontalLayout(saveButton, backButton); 
 
         // Añadir clase CSS para manejar el estilo  
         row1.addClassName("input-group");  
         row2.addClassName("input-group");  
-        row3.addClassName("input-group");  
+        row3.addClassName("input-group"); 
+        button.addClassName("input-group");  
 
         // Agrupar los layouts de filas y agregar  
         VerticalLayout inputLayout = new VerticalLayout(row1, row2, row3);  
-        inputLayout.getStyle().set("margin-left", "20px");  
+        inputLayout.getStyle().set("margin-left", "20px").set("width", "auto");  
 
         // Crear un layout para los botones  
-        VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
-        buttonLayout.getStyle().set("margin-top", "20px");  
+        VerticalLayout buttonLayout = new VerticalLayout(button);  
+        buttonLayout.getStyle().set("margin-top", "20px").set("width", "auto");  
 
         // Añadir todos los layouts al componente principal  
         add(inputLayout, buttonLayout);  

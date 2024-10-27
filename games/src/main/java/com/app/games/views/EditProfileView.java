@@ -2,20 +2,22 @@ package com.app.games.views;
 
 import com.app.games.model.User;  
 import com.app.games.service.UserService;  
-import com.vaadin.flow.component.button.Button;  
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.H3;  
 import com.vaadin.flow.component.notification.Notification;  
+import com.vaadin.flow.component.textfield.PasswordField;  
 import com.vaadin.flow.component.textfield.TextField;  
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;  
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;  
 import com.vaadin.flow.router.BeforeEnterEvent;  
 import com.vaadin.flow.router.BeforeEnterObserver;  
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinSession;
-
+import com.vaadin.flow.router.Route;  
+import com.vaadin.flow.server.VaadinSession;  
 import org.springframework.beans.factory.annotation.Autowired;  
 
 @Route("edit-profile")  
+@StyleSheet("frontend/styles/styles.css")
 public class EditProfileView extends VerticalLayout implements BeforeEnterObserver {  
 
     private final UserService userService;  
@@ -23,8 +25,8 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
     private TextField apellidoField;  
     private TextField correoField;  
     private TextField nombreUsuarioField;  
-    private TextField contrasenaField;  
-    private String userId;
+    private PasswordField contrasenaField;  
+    private String userId;  
 
     private HeaderComponent header;  
 
@@ -32,77 +34,74 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
     public EditProfileView(UserService userService) {  
         this.userService = userService;  
 
-       setPadding(false); // Eliminar el padding  
-        setMargin(false); // Eliminar el margin  
+        setPadding(false);  
+        setMargin(false);  
+        setWidthFull();  
 
         header = new HeaderComponent();  
-        
-        // Solicitando que el título no sea clickeable y ocultando el perfil  
         header.setTitleClickable(true);  
         header.setProfileLinkVisible(true);  
-
-        // Agregar el header a la vista  
-        add(header); 
+        add(header);  
 
         H3 title = new H3("Edit Profile");  
         title.getStyle().set("margin-left", "20px");  
         add(title);  
 
+        // Crear los campos de entrada  
         nombreField = new TextField("Name");  
-        apellidoField = new TextField("LastName");  
+        apellidoField = new TextField("Last Name");  
         correoField = new TextField("Email");  
         nombreUsuarioField = new TextField("Username");  
-        contrasenaField = new TextField("Password");  
+        contrasenaField = new PasswordField("Password");  
 
+        // Crear botones  
         Button backButton = new Button("Go Back");  
         backButton.getStyle().set("margin-left", "20px");  
 
         Button saveButton = new Button("Confirm Changes");  
         saveButton.getStyle().set("margin-left", "20px");  
 
-        VerticalLayout layout = new VerticalLayout(  
-                createRow("Name", nombreField),  
-                createRow("LastName", apellidoField),  
-                createRow("Email", correoField),  
-                createRow("Username", nombreUsuarioField),  
-                createRow("Paasword", contrasenaField)  
-        );  
-        layout.getStyle().set("margin-left", "20px").set("width", "auto");  
+        // Agrupar los campos en filas  
+        HorizontalLayout row1 = new HorizontalLayout(nombreField, apellidoField); // Fila 1  
+        HorizontalLayout row2 = new HorizontalLayout(correoField, nombreUsuarioField); // Fila 2  
+        HorizontalLayout row3 = new HorizontalLayout(contrasenaField); // Fila 3 (única)  
+
+        // Añadir clase CSS para manejar el estilo  
+        row1.addClassName("input-group");  
+        row2.addClassName("input-group");  
+        row3.addClassName("input-group");  
+
+        // Agrupar los layouts de filas y agregar  
+        VerticalLayout inputLayout = new VerticalLayout(row1, row2, row3);  
+        inputLayout.getStyle().set("margin-left", "20px");  
 
         // Crear un layout para los botones  
         VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
-        buttonLayout.getStyle().set("margin-bottom", "20px");  
+        buttonLayout.getStyle().set("margin-top", "20px");  
 
         // Añadir todos los layouts al componente principal  
-        add(layout, buttonLayout);  
+        add(inputLayout, buttonLayout);  
 
-        // Añadir listener para el botón de guardar  
+        // Añadir listeners para los botones  
         saveButton.addClickListener(e -> saveUserProfile());  
-
-        // Añadir listener para el botón de regresar  
         backButton.addClickListener(e -> navigateBack());  
     }  
 
     private void navigateBack() {  
-        // Redirige a la vista anterior, ajusta la ruta según sea necesario  
+        // Redirige a la vista anterior  
         getUI().ifPresent(ui -> ui.navigate("/my-profile"));  
-    }  
-
-    private HorizontalLayout createRow(String labelText, TextField textField) {  
-        textField.setLabel(labelText);  
-        return new HorizontalLayout(textField);  
     }  
 
     @Override  
     public void beforeEnter(BeforeEnterEvent event) {  
         // Obtiene el userId de la sesión actual  
-        this.userId = (String) VaadinSession.getCurrent().getAttribute("userId");     
+        this.userId = (String) VaadinSession.getCurrent().getAttribute("userId");  
 
         // Si no se encuentra el usuario, redirigir al login  
         if (this.userId != null) {  
-            User user = userService.findUserById(this.userId); // Obtiene el usuario por ID  
+            User user = userService.findUserById(this.userId);  
             if (user != null) {  
-                populateForm(user); // Llama a populateForm con el objeto User  
+                populateForm(user);  
             } else {  
                 Notification.show("No se encontró el usuario. Por favor, inicia sesión.", 3000, Notification.Position.MIDDLE);  
                 event.rerouteTo("login");  
@@ -118,7 +117,7 @@ public class EditProfileView extends VerticalLayout implements BeforeEnterObserv
         apellidoField.setValue(user.getApellido());  
         correoField.setValue(user.getCorreo());  
         nombreUsuarioField.setValue(user.getNombreUsuario());  
-        contrasenaField.setValue(user.getContrasena());  
+        contrasenaField.setValue(user.getContrasena()); // Considera si deseas mostrar la contraseña  
     }  
 
     private void saveUserProfile() {  

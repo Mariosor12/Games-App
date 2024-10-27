@@ -5,6 +5,7 @@ import com.app.games.service.GameService;
 import com.vaadin.flow.component.button.Button;  
 import com.vaadin.flow.component.checkbox.Checkbox;  
 import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dependency.StyleSheet;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;  
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;  
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;  
 
 @Route("add-game")  
+@StyleSheet("frontend/styles/styles.css")
 public class AddGameView extends VerticalLayout {  
 
     private final GameService gameService;  
@@ -58,19 +60,55 @@ public class AddGameView extends VerticalLayout {
         add(title);   
 
         // Cambiar HorizontalLayout por VerticalLayout para hacer que los elementos estén uno debajo del otro  
-        VerticalLayout layout1 = new VerticalLayout(createRow("Name", nombreField),  
-            createRow("Genre", tipoField), createRow("Developer", empresaDesarrolladoraField),  
-            createRow("Platforms (separated by comma)", plataformasField), createRow("Quantity Local CO-OP", cantidadJugadoresLocalField),  
-            createRow("Release Date", fechaSalidaField), createRow(coOpLocalCheckbox, coOpOnlineCheckbox), createRow("Review", puntuacionField),  
-            createRow("Commentary", comentarioField));  
-        layout1.getStyle().set("margin-left", "20px").set("width", "auto");   
+        nombreField = new TextField("Name");  
+        tipoField = new TextField("Genre");  
+        empresaDesarrolladoraField = new TextField("Developer");  
+        plataformasField = new TextField("Platforms (separated by comma)");  
+        cantidadJugadoresLocalField = new TextField("Quantity Local CO-OP");  
+        fechaSalidaField = new DatePicker("Release Date");  
+        coOpLocalCheckbox = new Checkbox("Local Co-Op");  
+        coOpOnlineCheckbox = new Checkbox("Online Co-Op");
+        puntuacionField = new TextField("Review"); 
+        comentarioField = new TextField("Comentary");   
 
-        // Crear un layout para los botones y añadir margenes para separación  
+        Button backButton = new Button("Go Back");   
+        backButton.getStyle().set("margin-left", "20px");  
+
+        Button saveButton = new Button("Confirm Changes");   
+        saveButton.getStyle().set("margin-left", "20px");   
+
+        // Agrupar los campos en verticales  
+        VerticalLayout nombreLayout = new VerticalLayout(nombreField);  
+        VerticalLayout tipoLayout = new VerticalLayout(tipoField);  
+        VerticalLayout empresaLayout = new VerticalLayout(empresaDesarrolladoraField);  
+        VerticalLayout plataformasLayout = new VerticalLayout(plataformasField);  
+        VerticalLayout cantidadJugadoresLayout = new VerticalLayout(cantidadJugadoresLocalField);  
+        VerticalLayout fechaSalidaLayout = new VerticalLayout(fechaSalidaField); 
+        VerticalLayout cantidadReview = new VerticalLayout(puntuacionField);  
+        VerticalLayout comentarioLayout = new VerticalLayout(comentarioField); 
+        
+        // Agrupar dos por fila en horizontal  
+        HorizontalLayout inputLayout1 = new HorizontalLayout(nombreLayout, tipoLayout);  
+        HorizontalLayout inputLayout2 = new HorizontalLayout(empresaLayout, plataformasLayout);  
+        HorizontalLayout inputLayout3 = new HorizontalLayout(cantidadJugadoresLayout, fechaSalidaLayout);
+        HorizontalLayout inputLayout4 = new HorizontalLayout(cantidadReview, comentarioLayout);  
+        HorizontalLayout checkboxLayout = new HorizontalLayout(coOpLocalCheckbox, coOpOnlineCheckbox);  
+
+        // Añadir la clase CSS a los layouts para los inputs  
+        inputLayout1.addClassName("input-group");  
+        inputLayout2.addClassName("input-group");  
+        inputLayout3.addClassName("input-group");  
+        inputLayout4.addClassName("input-group"); 
+        checkboxLayout.addClassName("input-group");  
+
+        // Crear un layout para los botones utilizando VerticalLayout  
         VerticalLayout buttonLayout = new VerticalLayout(saveButton, backButton);  
-        buttonLayout.getStyle().set("margin-left", "20px").set("margin-bottom", "20px").set("width", "auto");  
+        buttonLayout.getStyle().set("margin-bottom", "20px");
+        
+        buttonLayout.addClassName("button-group");
 
         // Añadir todos los layouts al componente principal  
-        add(layout1, buttonLayout);   
+        add(title, inputLayout1, inputLayout2, inputLayout3, checkboxLayout, inputLayout4, buttonLayout);   
 
         // Añadir listener para el botón de guardar  
         saveButton.addClickListener(e -> saveGame());  

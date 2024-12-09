@@ -19,6 +19,9 @@ RUN chmod +x ./gradlew
 # Compila la aplicación  
 RUN ./gradlew build --no-daemon  
 
+# Asegúrate de listar las bibliotecas generadas  
+RUN ls -la build/libs  
+
 # Usa una imagen base de OpenJDK para ejecutar la aplicación  
 FROM openjdk:17-slim   
 
@@ -28,7 +31,7 @@ WORKDIR /games
 RUN mkdir -p /games/build/libs  
 
 # Copia el JAR compilado desde la etapa de construcción  
-COPY --from=builder /games/build/libs/games-0.0.1-SNAPSHOT.jar /games/build/libs/games-0.0.1-SNAPSHOT.jar  
+COPY --from=builder /games/build/libs/games-0.0.1-SNAPSHOT.jar /games/games-0.0.1-SNAPSHOT.jar  
 
 # Expone el puerto donde se ejecutará tu aplicación  
 EXPOSE 8080  

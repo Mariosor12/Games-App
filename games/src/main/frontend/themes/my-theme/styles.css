@@ -1,0 +1,10 @@
+/* src/main/frontend/themes/my-theme/styles.css */  
+:root {  
+    --primary-color: #6200ea;  
+    --background-color: #f3f4f6;  
+}  
+
+body {  
+    background-color: var(--background-color);  
+    color: var(--primary-color);  
+}

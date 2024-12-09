@@ -36,6 +36,10 @@ dependencyManagement {
     }  
 }  
 
+vaadin {  
+    productionMode = false // Cambia a true para producción  
+} 
+
 tasks.named('test') {  
     useJUnitPlatform()  
 }

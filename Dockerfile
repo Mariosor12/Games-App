@@ -24,6 +24,9 @@ FROM openjdk:17-slim
 
 WORKDIR /games  
 
+# Crea el directorio de destino  
+RUN mkdir -p /games/build/libs  
+
 # Copia el JAR compilado desde la etapa de construcción  
 COPY --from=builder /games/build/libs/games-0.0.1-SNAPSHOT.jar /games/build/libs/games-0.0.1-SNAPSHOT.jar  
 

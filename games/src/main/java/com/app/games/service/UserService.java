@@ -16,7 +16,7 @@ import java.util.Arrays;
 @Service  
 public class UserService {  
 
-    private final String jsonServerUrl = "https://games-app-toe0.onrender.com/users";  
+    private final String jsonServerUrl = "https://games-app-az0f.onrender.com/users";  
 
     @Autowired  
     private RestTemplate restTemplate;  

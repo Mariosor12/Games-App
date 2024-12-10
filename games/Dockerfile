@@ -11,7 +11,7 @@ COPY gradlew .
 COPY gradle ./gradle   
 COPY src ./src  
 
-# Verifica que el wrapper de Gradle sea ejecutable  
+# Verifica que el wrapper de Gradle sea ejecutable (opcional)  
 RUN chmod +x ./gradlew  
 
 # Ejecuta la construcción del proyecto, incluyendo el frontend  

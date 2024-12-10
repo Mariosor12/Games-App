@@ -11,19 +11,8 @@ COPY gradlew .
 COPY gradle ./gradle   
 COPY src ./src  
 
-# Instala Node.js y npm  
-RUN apt-get update && apt-get install -y \
-    curl \
-    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*  
-
 # Verifica que el wrapper de Gradle sea ejecutable  
 RUN chmod +x ./gradlew  
-
-# Ejecución del comando para instalar las dependencias de npm primero antes de construir  
-RUN npm install --prefix ./src/main/frontend  
 
 # Ejecuta la construcción del proyecto, incluyendo el frontend  
 RUN ./gradlew clean build --no-daemon  

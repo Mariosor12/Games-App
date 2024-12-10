@@ -1,33 +1,33 @@
-# Usa una imagen de Gradle para construir la aplicación  
+# Usa la imagen de Gradle como base para construir el proyecto  
 FROM gradle:7.6.0-jdk17 AS builder  
 
-# Establece el directorio de trabajo  
+# Establece el directorio de trabajo en /games  
 WORKDIR /games  
 
-# Copia archivos de configuración y fuentes de la aplicación  
+# Copia los archivos de configuración necesarios para Gradle al contenedor  
 COPY settings.gradle .  
 COPY build.gradle .  
 COPY gradlew .  
 COPY gradle ./gradle   
 COPY src ./src  
 
-# Asegúrate de que el wrapper de Gradle sea ejecutable  
+# Verifica que el wrapper de Gradle sea ejecutable (opcional)  
 RUN chmod +x ./gradlew  
 
-# Compila la aplicación  
-RUN ./gradlew build --no-daemon  
+# Ejecuta la construcción del proyecto, incluyendo el frontend  
+RUN ./gradlew clean build --no-daemon  
 
-# Usa una imagen base de OpenJDK para ejecutar la aplicación  
+# Usa una imagen de OpenJDK para crear la imagen final  
 FROM openjdk:17-slim  
 
-# Establece el directorio de trabajo  
+# Establece el directorio de trabajo en /games  
 WORKDIR /games  
 
-# Copia el archivo JAR compilado desde la etapa de construcción  
-COPY --from=builder /build/libs/games-0.0.1-SNAPSHOT.jar /games-0.0.1-SNAPSHOT.jar  
+# Copia el archivo JAR construido desde la fase de construcción  
+COPY --from=builder /games/build/libs/games-0.0.1-SNAPSHOT.jar /games/app.jar  
 
-# Expone el puerto donde se ejecutará tu aplicación  
+# Expone el puerto en el que se ejecutará la aplicación  
 EXPOSE 8080  
 
-# Comando para ejecutar la aplicación  
-CMD ["sh", "-c", "java -jar games-0.0.1-SNAPSHOT.jar"]
+# Comando para ejecutar la aplicación en el contenedor  
+CMD ["java", "-jar", "/games/app.jar"]
